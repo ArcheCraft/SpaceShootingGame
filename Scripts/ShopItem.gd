@@ -40,10 +40,12 @@ func set_stuff():
 		$BuyButton.text +=  ": " + str(current_price) + " MD"
 		
 		$GrayOut.hide()
+		$NextBonus.show()
 	else:
 		$BuyButton.disabled = true
 		
 		$GrayOut.show()
+		$NextBonus.hide()
 	
 	$NotEnoughMD.visible = not_enough_md
 

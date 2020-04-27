@@ -130,11 +130,11 @@ func _physics_process(delta):
 func _on_Meteor_area_entered(area):
 	if "Laser" in area.name:
 		health -= area.damage
+		area.queue_free()
 	
 	if health <= 0:
 		health = 0
 		queue_free()
-		area.queue_free()
 		Globals.add_dust(dust)
 	
 	update_health_bar()

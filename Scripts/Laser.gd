@@ -5,7 +5,7 @@ onready var damage = Globals.laser_damage
 func _ready():
 	pass
 
-func _process(delta):
+func _physics_process(delta):
 	var width = get_viewport().get_visible_rect().size.x
 	var height = get_viewport().get_visible_rect().size.y
 	

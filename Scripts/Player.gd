@@ -1,11 +1,14 @@
 extends Area2D
 
 var shoot_ready = true
+var regenerate = true
 
 var laser = preload("res://Scenes/Laser.tscn")
 
 func _ready():
-	pass # Replace with function body.
+	Globals.player_health = Globals.max_player_health
+	
+	$HealthBar.max_value = Globals.max_player_health
 
 func _physics_process(delta):
 	if Input.is_action_pressed("ui_up"):
@@ -24,10 +27,26 @@ func _physics_process(delta):
 		var laser_instance = laser.instance()
 		laser_instance.transform = transform
 		get_parent().add_child(laser_instance)
+	if regenerate:
+		Globals.player_health += Globals.player_regeneration_speed * delta
+	
+	update_health_bar()
+
+func update_health_bar():
+	$HealthBar.value = Globals.player_health
 
 func _on_Player_area_entered(area):
 	if "Meteor" in area.name:
+		Globals.player_health -= area.health
+		area.queue_free()
+		regenerate = false
+		$RegenTimer.start(5)
+	if Globals.player_health <= 0:
+		Globals.player_health = Globals.max_player_health
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 func _on_ShootTimer_timeout():
 	shoot_ready = true
+
+func _on_RegenTimer_timeout():
+	regenerate = true

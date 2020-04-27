@@ -1,6 +1,13 @@
 extends Control
 
 func _ready():
+	$DustBonus.item_name = "Dust Bonus"
+	$PlayerMovementSpeed.item_name = "Movement Speed"
+	$LaserDamage.item_name = "Damage"
+	$LaserSpeed.item_name = "Laser Speed"
+	$ShootingSpeed.item_name = "Shooting Speed"
+	$PlayerHealth.item_name = "Max Health"
+	
 	for node in get_children():
 		if node.has_method("restore_state"):
 			node.restore_state()
@@ -40,7 +47,7 @@ func _on_PlayerMovementSpeed_item_bought(item_name, old_count, new_count, old_ef
 
 func _on_PlayerMovementSpeed_to_initialize():
 	$PlayerMovementSpeed.item_name = "Movement Speed"
-	$PlayerMovementSpeed.max_count = 5
+	$PlayerMovementSpeed.max_count = 40
 	$PlayerMovementSpeed.current_effect = str(Globals.player_movement_speed) + " Pixels per Second"
 	$PlayerMovementSpeed.current_price = Globals.player_movement_speed_price
 	
@@ -68,7 +75,7 @@ func _on_LaserDamage_to_initialize():
 	update_LaserDamage()
 
 func update_LaserDamage():
-	$LaserDamage.next_effect = str(Globals.laser_damage + Globals.laser_damage_step) + " Damge per Shot"
+	$LaserDamage.next_effect = str(Globals.laser_damage + Globals.laser_damage_step) + " Damage per Shot"
 	$LaserDamage.next_bonus = "+" +str(Globals.laser_damage_step)
 	$LaserDamage.next_price = Globals.laser_damage_price + Globals.laser_damage_price_step
 	
@@ -82,7 +89,7 @@ func _on_LaserSpeed_item_bought(item_name, old_count, new_count, old_effect, new
 
 func _on_LaserSpeed_to_initialize():
 	$LaserSpeed.item_name = "Laser Speed"
-	$LaserSpeed.max_count = 15
+	$LaserSpeed.max_count = 60
 	$LaserSpeed.current_effect = str(Globals.laser_speed) + " Pixels per Second"
 	$LaserSpeed.current_price = Globals.laser_speed_price
 	
@@ -103,7 +110,7 @@ func _on_ShootingSpeed_item_bought(item_name, old_count, new_count, old_effect, 
 
 func _on_ShootingSpeed_to_initialize():
 	$ShootingSpeed.item_name = "Shooting Speed"
-	$ShootingSpeed.max_count = 20
+	$ShootingSpeed.max_count = 60
 	$ShootingSpeed.current_effect = str(Globals.shooting_speed) + " Shots per Second"
 	$ShootingSpeed.current_price = Globals.shooting_speed_price
 	
@@ -115,3 +122,24 @@ func update_ShootingSpeed():
 	$ShootingSpeed.next_price = Globals.shooting_speed_price + Globals.shooting_speed_price_step
 	
 	$ShootingSpeed.set_stuff()
+
+func _on_PlayerHealth_item_bought(item_name, old_count, new_count, old_effect, new_effect, bonus_to_apply):
+	Globals.max_player_health += Globals.player_health_step
+	Globals.player_health_price += Globals.player_health_price_step
+	
+	update_PlayerHealth()
+
+func _on_PlayerHealth_to_initialize():
+	$PlayerHealth.item_name = "Max Health"
+	$PlayerHealth.infinite = true
+	$PlayerHealth.current_effect = str(Globals.max_player_health) + " Lifes"
+	$PlayerHealth.current_price = Globals.player_health_price
+	
+	update_PlayerHealth()
+
+func update_PlayerHealth():
+	$PlayerHealth.next_effect = str(Globals.max_player_health + Globals.player_health_step) + " Lifes"
+	$PlayerHealth.next_bonus = "+" + str(Globals.player_health_step)
+	$PlayerHealth.next_price = Globals.player_health_price + Globals.player_health_price_step
+	
+	$PlayerHealth.set_stuff()
