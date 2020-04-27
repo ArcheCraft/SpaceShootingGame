@@ -1,0 +1,109 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/ShopMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/ShopItem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/images/farbbalken.png" type="Texture" id=4]
+
+[node name="ShopMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+margin_left = -100.0
+margin_top = -25.0
+margin_right = 100.0
+margin_bottom = 25.0
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DustBonus" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.2
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.175
+item_name = "Dust Bonus"
+max_count = 4
+infinite = true
+current_effect = " - "
+next_effect = "Hello"
+next_bonus = "Hi"
+visualization_graphic = ExtResource( 4 )
+current_price = 100
+next_price = 1000
+
+[node name="PlayerMovementSpeed" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.325
+item_name = "Movement Speed"
+max_count = 4
+current_effect = "Test"
+next_effect = "Hello"
+next_bonus = "Hi"
+visualization_graphic = ExtResource( 4 )
+current_price = 100
+next_price = 1000
+
+[node name="LaserDamage" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.2
+anchor_top = 0.35
+anchor_right = 0.8
+anchor_bottom = 0.475
+item_name = "Laser Damage"
+max_count = 4
+current_effect = "Test"
+next_effect = "Hello"
+next_bonus = "Hi"
+visualization_graphic = ExtResource( 4 )
+current_price = 100
+next_price = 1000
+
+[node name="LaserSpeed" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.2
+anchor_top = 0.5
+anchor_right = 0.8
+anchor_bottom = 0.625
+item_name = "Laser Speed"
+max_count = 4
+current_effect = "Test"
+next_effect = "Hello"
+next_bonus = "Hi"
+visualization_graphic = ExtResource( 4 )
+current_price = 100
+next_price = 1000
+
+[node name="ShootingSpeed" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.2
+anchor_top = 0.65
+anchor_right = 0.8
+anchor_bottom = 0.775
+item_name = "Laser Speed"
+max_count = 4
+current_effect = "Test"
+next_effect = "Hello"
+next_bonus = "Hi"
+visualization_graphic = ExtResource( 4 )
+current_price = 100
+next_price = 1000
+[connection signal="pressed" from="QuitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="item_bought" from="DustBonus" to="." method="_on_DustBonus_item_bought"]
+[connection signal="to_initialize" from="DustBonus" to="." method="_on_DustBonus_to_initialize"]
+[connection signal="item_bought" from="PlayerMovementSpeed" to="." method="_on_PlayerMovementSpeed_item_bought"]
+[connection signal="to_initialize" from="PlayerMovementSpeed" to="." method="_on_PlayerMovementSpeed_to_initialize"]
+[connection signal="item_bought" from="LaserDamage" to="." method="_on_LaserDamage_item_bought"]
+[connection signal="to_initialize" from="LaserDamage" to="." method="_on_LaserDamage_to_initialize"]
+[connection signal="item_bought" from="LaserSpeed" to="." method="_on_LaserSpeed_item_bought"]
+[connection signal="to_initialize" from="LaserSpeed" to="." method="_on_LaserSpeed_to_initialize"]
+[connection signal="item_bought" from="ShootingSpeed" to="." method="_on_ShootingSpeed_item_bought"]
+[connection signal="to_initialize" from="ShootingSpeed" to="." method="_on_ShootingSpeed_to_initialize"]
