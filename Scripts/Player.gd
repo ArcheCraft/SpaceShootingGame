@@ -27,7 +27,7 @@ func _physics_process(delta):
 		var laser_instance = laser.instance()
 		laser_instance.transform = transform
 		get_parent().add_child(laser_instance)
-	if regenerate:
+	if regenerate && (Globals.player_health + (Globals.player_regeneration_speed * delta)) < Globals.max_player_health:
 		Globals.player_health += Globals.player_regeneration_speed * delta
 	
 	update_health_bar()
