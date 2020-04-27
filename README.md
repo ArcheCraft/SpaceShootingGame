@@ -1,3 +1,3 @@
 # SpaceShootingGame
 
-Download for your OS at [Releases](https://github.com/ArcheCraft/SpaceShootingGame/releases)
+Download at [Releases](https://github.com/ArcheCraft/SpaceShootingGame/releases)
