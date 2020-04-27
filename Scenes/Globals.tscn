@@ -4,3 +4,7 @@
 
 [node name="Globals" type="Node"]
 script = ExtResource( 1 )
+meteor_life_time_multiplier = 1.005
+meteor_speed_time_multiplier = 1.001
+meteor_time_time_multiplier = 0.95
+meteor_dust_base = 7500
