@@ -41,6 +41,11 @@ func _on_Player_area_entered(area):
 		area.queue_free()
 		regenerate = false
 		$RegenTimer.start(5)
+	if "EnemyShot" in area.name:
+		Globals.player_health -= area.damage
+		area.queue_free()
+		regenerate = false
+		$RegenTimer.start(5)
 	if Globals.player_health <= 0:
 		Globals.player_health = Globals.max_player_health
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")

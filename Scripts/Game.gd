@@ -1,11 +1,13 @@
 extends Node2D
 
 var meteor = preload("res://Scenes/Meteor.tscn")
+var enemy = preload("res://Scenes/Enemy.tscn")
 
 func _ready():
 	$Player.position = get_viewport().get_visible_rect().size / 2
-	$MeteorTimer.wait_time = 1
-	$MeteorTimer.start()
+	$MeteorTimer.start(1)
+	
+	$EnemyTimer.start(15)
 
 func _process(delta):
 	if Input.is_action_pressed("ui_cancel"):
@@ -64,3 +66,11 @@ func _on_Timer_timeout():
 	meteor_instance.dust = Globals.calc_dust(rand_range(1, 56.7), meteor_instance.max_health)
 	
 	add_child(meteor_instance)
+
+func _on_EnemyTimer_timeout():
+	$EnemyTimer.start(Globals.calc_time_til_next_meteor() * 10)
+	
+	var enemy_instance = enemy.instance()
+	enemy_instance.position = rand_pos_outside_screen()
+	
+	add_child(enemy_instance)
