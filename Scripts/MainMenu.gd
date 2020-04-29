@@ -24,3 +24,6 @@ func _on_ShopButton_pressed():
 
 func _on_SettingsButton_pressed():
 	get_tree().change_scene("res://Scenes/SettingsMenu.tscn")
+
+func _on_HelpButton_pressed():
+	$HelpMenu.popup_centered()

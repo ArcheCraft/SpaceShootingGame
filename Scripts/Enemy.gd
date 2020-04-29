@@ -3,28 +3,32 @@ extends Area2D
 var shoot_ready = true
 var regenerate = true
 
-var health = 0
-var max_health = 0
-export var shooting_speed = 15
+var health = 0.0
+var max_health = 0.0
+export var shooting_speed = 30
 var movement_speed = 0
 var dust = 0
 
 var in_range = false
+
+var timeout = 0.5
 
 onready var player = get_tree().root.find_node("Player", true, false)
 
 var laser = preload("res://Scenes/EnemyShot.tscn")
 
 func _ready():
-	max_health = Globals.calc_meteor_life() * 3
+	max_health = (Globals.calc_meteor_life() + 5) * 2
 	health = max_health
-	movement_speed = Globals.calc_speed_of_meteor() * 2
+	movement_speed = Globals.player_movement_speed / 2
 	dust = Globals.calc_dust(rand_range(1, 100), max_health) * 2.5
 	
 	$HealthBar.max_value = max_health
 
 func _physics_process(delta):
-	if shoot_ready:
+	timeout -= delta
+	
+	if shoot_ready and timeout < 0:
 		shoot_ready = false
 		$ShootTimer.start(1 / shooting_speed)
 		var laser_instance = laser.instance()
@@ -55,6 +59,7 @@ func _on_Enemy_area_entered(area):
 		area.queue_free()
 	if health <= 0:
 		health = max_health
+		get_tree().root.find_node("Game", true, false).meteor_spawning = true
 		queue_free()
 
 func _on_ShootTimer_timeout():

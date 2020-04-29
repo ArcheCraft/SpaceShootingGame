@@ -6,6 +6,7 @@ var player_movement_speed = 0
 export var player_movement_speed_price_base = 10000
 export var player_movement_speed_price_step = 5000
 var player_movement_speed_price = 0
+export var player_movement_speed_max_count = 10
 
 export var player_health_base = 20
 export var player_health_step = 10
@@ -15,7 +16,6 @@ export var player_health_price_base = 12500
 export var player_health_price_step = 15000
 var player_health_price
 
-export var player_regeneration_speed = 2
 export var player_rotation_speed = 10
 
 export var laser_speed_base = 1500
@@ -24,6 +24,7 @@ var laser_speed = 0
 export var laser_speed_price_base = 5000
 export var laser_speed_price_step = 8500
 var laser_speed_price = 0
+export var laser_speed_max_count = 30
 
 export var dust_player_bonus_step = 100
 var dust_player_bonus = 0
@@ -44,6 +45,7 @@ var shooting_speed = 0
 export var shooting_speed_price_base = 15000
 export var shooting_speed_price_step = 20000
 var shooting_speed_price = 0
+export var shooting_speed_max_count = 20
 
 
 export var meteor_life_time_multiplier = 1.025
@@ -67,7 +69,7 @@ var shop_item_states = {}
 export var meteor_dust_base = 0
 var meteor_dust = 0
 
-var mouse_control = false
+var mouse_control = true
 
 var elapsed_time = 0.0
 var last_multiplied = 0.0

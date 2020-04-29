@@ -101,9 +101,47 @@ text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HelpButton" type="Button" parent="."]
+anchor_left = 0.99
+anchor_top = 0.02
+anchor_right = 0.99
+anchor_bottom = 0.02
+margin_left = -25.0
+margin_bottom = 25.0
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpMenu" type="AcceptDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+window_title = "Help"
+dialog_text = "CONTROLS
+To move forward, use 'W' or 'UP', to turn use 'A' and 'D' or 'LEFT' and 'RIGHT'.
+If you don't want to turn that way, in the settings there is an option called \"Mouse control\".
+When checked, the keys for turning get deactivated and instead your plane turns at yout cursor!
+To shoot, use 'SPACE' or press the left mouse button.
+All controls allow to be hold.
+
+
+ABOUT THE GAME
+While playing, there will be meteors spawning. Kill them with your laser before they reach you.
+When they reach you, they damage you with their lifes left.
+Every couple seconds there will spawn an Enemy, which moves up to a distance to you and then circles around you.
+Shoot it, it does heavy damage by shooting at you!
+
+With more time played, there will come more and stronger meteors and enemies.
+Use the meteor dust (MD) you get from killing them to upgrade yourself in the Shop!
+But remember, when \"mouse control\" is activated, because it is easier, you get much less MD!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="QuitAccept" to="." method="_on_QuitAccept_pressed"]
 [connection signal="pressed" from="QuitDecline" to="." method="_on_QuitDecline_pressed"]
 [connection signal="pressed" from="ShopButton" to="." method="_on_ShopButton_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]

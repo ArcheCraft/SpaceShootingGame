@@ -47,7 +47,7 @@ func _on_PlayerMovementSpeed_item_bought(item_name, old_count, new_count, old_ef
 
 func _on_PlayerMovementSpeed_to_initialize():
 	$PlayerMovementSpeed.item_name = "Movement Speed"
-	$PlayerMovementSpeed.max_count = 40
+	$PlayerMovementSpeed.max_count = Globals.player_movement_speed_max_count
 	$PlayerMovementSpeed.current_effect = str(Globals.player_movement_speed) + " Pixels per Second"
 	$PlayerMovementSpeed.current_price = Globals.player_movement_speed_price
 	
@@ -89,7 +89,7 @@ func _on_LaserSpeed_item_bought(item_name, old_count, new_count, old_effect, new
 
 func _on_LaserSpeed_to_initialize():
 	$LaserSpeed.item_name = "Laser Speed"
-	$LaserSpeed.max_count = 60
+	$LaserSpeed.max_count = Globals.laser_speed_max_count
 	$LaserSpeed.current_effect = str(Globals.laser_speed) + " Pixels per Second"
 	$LaserSpeed.current_price = Globals.laser_speed_price
 	
@@ -110,7 +110,7 @@ func _on_ShootingSpeed_item_bought(item_name, old_count, new_count, old_effect, 
 
 func _on_ShootingSpeed_to_initialize():
 	$ShootingSpeed.item_name = "Shooting Speed"
-	$ShootingSpeed.max_count = 60
+	$ShootingSpeed.max_count = Globals.shooting_speed_max_count
 	$ShootingSpeed.current_effect = str(Globals.shooting_speed) + " Shots per Second"
 	$ShootingSpeed.current_price = Globals.shooting_speed_price
 	

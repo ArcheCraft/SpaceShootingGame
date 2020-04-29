@@ -11,7 +11,9 @@ position = Vector2( 486, 221 )
 z_index = 1
 
 [node name="MeteorTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
-[connection signal="timeout" from="MeteorTimer" to="." method="_on_Timer_timeout"]
+one_shot = true
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_MeteorTimer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]

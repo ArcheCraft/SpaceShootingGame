@@ -3,11 +3,13 @@ extends Node2D
 var meteor = preload("res://Scenes/Meteor.tscn")
 var enemy = preload("res://Scenes/Enemy.tscn")
 
+var meteor_spawning = true
+
 func _ready():
 	$Player.position = get_viewport().get_visible_rect().size / 2
 	$MeteorTimer.start(1)
 	
-	$EnemyTimer.start(15)
+	$EnemyTimer.start(20)
 
 func _process(delta):
 	if Input.is_action_pressed("ui_cancel"):
@@ -54,21 +56,22 @@ func rand_meteor_size():
 	if random == 9:
 		return "Tiny2"
 
-func _on_Timer_timeout():
-	$MeteorTimer.wait_time = Globals.calc_time_til_next_meteor()
-	$MeteorTimer.start()
+func _on_MeteorTimer_timeout():
+	$MeteorTimer.start(Globals.calc_time_til_next_meteor())
 	
-	var meteor_instance = meteor.instance()
-	meteor_instance.position = rand_pos_outside_screen()
-	meteor_instance.size = rand_meteor_size()
-	meteor_instance.max_health = Globals.calc_meteor_life()
-	meteor_instance.movement_speed = Globals.calc_speed_of_meteor()
-	meteor_instance.dust = Globals.calc_dust(rand_range(1, 56.7), meteor_instance.max_health)
-	
-	add_child(meteor_instance)
+	if meteor_spawning:
+		var meteor_instance = meteor.instance()
+		meteor_instance.position = rand_pos_outside_screen()
+		meteor_instance.size = rand_meteor_size()
+		meteor_instance.max_health = Globals.calc_meteor_life()
+		meteor_instance.movement_speed = Globals.calc_speed_of_meteor()
+		meteor_instance.dust = Globals.calc_dust(rand_range(1, 56.7), meteor_instance.max_health)
+		
+		add_child(meteor_instance)
 
 func _on_EnemyTimer_timeout():
-	$EnemyTimer.start(Globals.calc_time_til_next_meteor() * 10)
+	$EnemyTimer.start(Globals.calc_time_til_next_meteor() * 30)
+	meteor_spawning = false
 	
 	var enemy_instance = enemy.instance()
 	enemy_instance.position = rand_pos_outside_screen()
