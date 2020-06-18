@@ -1,9 +1,8 @@
 extends Area2D
 
-var shoot_ready = true
 var regenerate = true
 
-var laser = preload("res://Scenes/Laser.tscn")
+onready var weapon: Weapon = Globals.weapon
 
 func _ready():
 	Globals.player_health = Globals.max_player_health
@@ -21,12 +20,8 @@ func _physics_process(delta):
 			rotate(Globals.player_rotation_speed * delta)
 		if Input.is_action_pressed("ui_right"):
 			rotate(-Globals.player_rotation_speed * delta)
-	if Input.is_action_pressed("ui_fire") and shoot_ready:
-		shoot_ready = false
-		$ShootTimer.start(1 / Globals.shooting_speed)
-		var laser_instance = laser.instance()
-		laser_instance.transform = transform
-		get_parent().add_child(laser_instance)
+	if Input.is_action_pressed("ui_fire"):
+		weapon.shoot(self.global_position, self.global_rotation, get_parent())
 	if regenerate:
 		Globals.player_health += (Globals.max_player_health / 10) * delta
 		if Globals.player_health > Globals.max_player_health:
@@ -38,12 +33,15 @@ func update_health_bar():
 	$HealthBar.value = Globals.player_health
 
 func _on_Player_area_entered(area):
+	if "Player" in area.name:
+		return
+	
 	if "Meteor" in area.name:
 		Globals.player_health -= area.health
 		area.queue_free()
 		regenerate = false
 		$RegenTimer.start(5)
-	if "EnemyShot" in area.name:
+	else:
 		Globals.player_health -= area.damage
 		area.queue_free()
 		regenerate = false
@@ -51,9 +49,6 @@ func _on_Player_area_entered(area):
 	if Globals.player_health <= 0:
 		Globals.player_health = Globals.max_player_health
 		get_tree().change_scene("res://Scenes/MainMenu.tscn")
-
-func _on_ShootTimer_timeout():
-	shoot_ready = true
 
 func _on_RegenTimer_timeout():
 	regenerate = true

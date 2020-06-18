@@ -29,6 +29,7 @@ color_ramp = SubResource( 4 )
 bg_color = Color( 0, 1, 0, 1 )
 
 [node name="Player" type="Area2D"]
+collision_mask = 24
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -56,9 +57,6 @@ randomness = 1.0
 local_coords = false
 process_material = SubResource( 5 )
 
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.1
-
 [node name="HealthBar" type="ProgressBar" parent="."]
 margin_left = -30.0
 margin_top = 50.0
@@ -72,5 +70,4 @@ __meta__ = {
 
 [node name="RegenTimer" type="Timer" parent="."]
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
-[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="timeout" from="RegenTimer" to="." method="_on_RegenTimer_timeout"]

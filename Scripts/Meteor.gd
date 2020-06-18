@@ -128,9 +128,18 @@ func _physics_process(delta):
 		queue_free()
 
 func _on_Meteor_area_entered(area):
-	if "Laser" in area.name:
+	if health <= 0:
+		return
+	
+	if "Player" in area.name:
+		return
+	
+	if "Enemy" == area.name:
+		health -= area.health
+	else:
 		health -= area.damage
-		area.queue_free()
+	
+	area.queue_free()
 	
 	if health <= 0:
 		health = 0

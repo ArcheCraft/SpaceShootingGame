@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scripts/EnemyShot.gd" type="Script" id=1]
-[ext_resource path="res://Assets/images/laserRed01.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Missile.gd" type="Script" id=1]
+[ext_resource path="res://Assets/kenney-graphics/Missiles/spaceMissiles_002.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.44147
-height = 46.4013
+radius = 6.10979
+height = 24.9939
 
-[node name="EnemyShot" type="Area2D"]
-collision_layer = 8
+[node name="Missile" type="Area2D"]
+collision_layer = 2
 collision_mask = 0
 script = ExtResource( 1 )
 

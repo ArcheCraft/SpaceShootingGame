@@ -6,6 +6,8 @@ var enemy = preload("res://Scenes/Enemy.tscn")
 var meteor_spawning = true
 
 func _ready():
+	add_child(Globals.weapon)
+	
 	$Player.position = get_viewport().get_visible_rect().size / 2
 	$MeteorTimer.start(1)
 	

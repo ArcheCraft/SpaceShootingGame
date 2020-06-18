@@ -47,6 +47,13 @@ export var shooting_speed_price_step = 20000
 var shooting_speed_price = 0
 export var shooting_speed_max_count = 20
 
+export var weapon_scene = preload("res://Scenes/Weapon.tscn")
+export var default_bullet = Weapon.weapons.Shotgun
+onready var weapon = weapon_scene.instance()
+
+export var shotgun_bullets = 10
+export var shotgun_spread = 0.13
+
 
 export var meteor_life_time_multiplier = 1.025
 var meteor_life_multiplier = 1
@@ -74,6 +81,9 @@ var mouse_control = true
 var elapsed_time = 0.0
 var last_multiplied = 0.0
 
+var size_y = 1000
+var size_x = 1000
+
 
 func _ready():
 	randomize()
@@ -93,6 +103,8 @@ func _ready():
 	player_health_price = player_health_price_base
 	
 	meteor_dust = meteor_dust_base
+	
+	weapon.set_bullet(default_bullet)
 
 func _process(delta):
 	if mouse_control:

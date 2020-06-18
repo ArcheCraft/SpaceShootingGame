@@ -54,9 +54,16 @@ func update_health_bar():
 	$HealthBar.value = health
 
 func _on_Enemy_area_entered(area):
-	if "Laser" in area.name:
+	if health <= 0:
+		return
+	
+	if "Meteor" in area.name:
+		health -= area.health
+		area.queue_free()
+	else:
 		health -= area.damage
 		area.queue_free()
+	
 	if health <= 0:
 		health = max_health
 		get_tree().root.find_node("Game", true, false).meteor_spawning = true
